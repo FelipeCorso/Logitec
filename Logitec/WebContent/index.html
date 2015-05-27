@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>LogiTec</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="../js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">LogiTec</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="frete.html">Fretes</span></a></li>
+					<li><a href="cliente.html">Clientes</a></li>
+					<li><a href="veiculo.html">Veículos</a></li>
+					<li><a href="funcionario.html">Funcionários</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="config.html"><span class="glyphicon glyphicon-user"></span> Olá Fulano</a></li>
+					<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2 panel text-center">
+				<div class="panel-heading">
+					<img src="icon/frete_64.png" alt="Cinque Terre" width="64" height="64">
+
+					<h5>Fretes em Aberto</h5>
+				</div>
+
+			</div>
+			<div class="col-md-2 panel text-center">
+				<div class="panel-heading">
+					<img src="icon/frete_64.png" alt="Cinque Terre" width="64" height="64">
+
+					<h5>Fretes Finalizados</h5>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="row">
+			<hr>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<form>
+				<div class="controls">
+					<label>Nome completo:</label> <input type="text" class="form-control" size="20px" id="name" required data-validation-required-message="Please enter your name.">
+					<p class="help-block"></p>
+
+					<label>CPF/CNPJ:</label> <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
+					<p class="help-block"></p>
+
+					<label>Cliente:</label> <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
+					<p class="help-block"></p>
+
+					<label>Funcionário:</label> <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
+					<p class="help-block"></p>
+				</div>
+				<div id="success"></div>
+				<!-- For success/fail messages -->
+				<button type="reset" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-primary">Salvar</button>
+
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

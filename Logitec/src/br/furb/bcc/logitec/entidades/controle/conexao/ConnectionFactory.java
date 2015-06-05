@@ -5,22 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	static {
+    static {
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (Exception e) {
-			System.out.println("ERRO");
-			e.printStackTrace();
-		}
+	try {
+	    Class.forName("com.mysql.jdbc.Driver");
+	} catch (Exception e) {
+	    System.out.println("ERRO");
+	    e.printStackTrace();
 	}
+    }
 
-	public Connection getConnection() {
-		try {
-			return DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/fj21", "root", "root");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+    public Connection getConnection() {
+	try {
+	    return DriverManager.getConnection("jdbc:mysql://localhost:3306/fj21", "root", "root");
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
 	}
+    }
 }

@@ -5,9 +5,12 @@ import java.sql.SQLException;
 import br.furb.bcc.logitec.entidades.modelo.IEntidade;
 
 public interface IDataAccessObject {
-	public void insere(IEntidade entidade) throws SQLException;
 
-	public void altera(IEntidade entidade) throws SQLException;
+    public IEntidade recuperar(int id) throws SQLException;
 
-	public void remove(IEntidade entidade) throws SQLException;
+    public void inserir(IEntidade entidade) throws SQLException;
+
+    public void alterar(IEntidade entidade) throws SQLException;
+
+    public void remover(IEntidade entidade) throws SQLException;
 }

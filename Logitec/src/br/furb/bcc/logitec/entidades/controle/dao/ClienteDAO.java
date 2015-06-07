@@ -15,6 +15,16 @@ import br.furb.bcc.logitec.entidades.modelo.pessoa.cliente.Cliente;
 
 public class ClienteDAO implements IDataAccessObject {
 
+    private static final ClienteDAO INSTANCE = new ClienteDAO();
+
+    private ClienteDAO() {
+
+    }
+
+    public static ClienteDAO getInstance() {
+	return INSTANCE;
+    }
+
     @Override
     public IEntidade recuperar(int id) throws SQLException {
 	Connection connection = new ConnectionFactory().getConnection();

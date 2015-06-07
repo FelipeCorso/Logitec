@@ -14,6 +14,16 @@ import br.furb.bcc.logitec.entidades.modelo.pessoa.funcionario.ECNH;
 import br.furb.bcc.logitec.entidades.modelo.pessoa.funcionario.Funcionario;
 
 public class FuncionarioDAO implements IDataAccessObject {
+
+    private static final FuncionarioDAO INSTANCE = new FuncionarioDAO();
+
+    private FuncionarioDAO() {
+    }
+
+    public static FuncionarioDAO getInstance() {
+	return INSTANCE;
+    }
+
     @Override
     public IEntidade recuperar(int id) throws SQLException {
 	Connection connection = new ConnectionFactory().getConnection();

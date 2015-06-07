@@ -3,10 +3,20 @@ package br.furb.bcc.logitec.entidades.modelo.pessoa;
 import br.furb.bcc.logitec.entidades.modelo.IEntidade;
 
 public abstract class Pessoa implements IEntidade {
+
+    private int id;
     private String nome;
     private String endereco;
     private String telefone;
     private String email;
+
+    public int getId() {
+	return id;
+    }
+
+    public void setId(int id) {
+	this.id = id;
+    }
 
     public String getNome() {
 	return nome;

@@ -3,6 +3,7 @@ package br.furb.bcc.logitec.entidades.modelo.pessoa.funcionario;
 import br.furb.bcc.logitec.entidades.modelo.pessoa.Pessoa;
 
 public class Funcionario extends Pessoa {
+
     private char genero;
     private String dataAdm;
     private String dataNasc;
@@ -12,7 +13,6 @@ public class Funcionario extends Pessoa {
     private String estadoCivil;
     private float salario;
     private ECNH cnh;
-    private int id;
 
     public char getGenero() {
 	return genero;
@@ -84,14 +84,6 @@ public class Funcionario extends Pessoa {
 
     public void setCnh(ECNH cnh) {
 	this.cnh = cnh;
-    }
-
-    public int getId() {
-	return id;
-    }
-
-    public void setId(int id) {
-	this.id = id;
     }
 
 }

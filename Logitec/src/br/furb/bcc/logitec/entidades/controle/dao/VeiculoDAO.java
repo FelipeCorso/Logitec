@@ -14,6 +14,16 @@ import br.furb.bcc.logitec.entidades.modelo.veiculo.Veiculo;
 
 public class VeiculoDAO implements IDataAccessObject {
 
+    private static final VeiculoDAO INSTANCE = new VeiculoDAO();
+
+    private VeiculoDAO() {
+
+    }
+
+    public static VeiculoDAO getInstance() {
+	return INSTANCE;
+    }
+
     @Override
     public IEntidade recuperar(int id) throws SQLException {
 

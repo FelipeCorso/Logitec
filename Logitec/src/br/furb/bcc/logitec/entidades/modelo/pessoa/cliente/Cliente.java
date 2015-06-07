@@ -5,16 +5,15 @@ import br.furb.bcc.logitec.entidades.modelo.pessoa.Pessoa;
 
 public class Cliente extends Pessoa {
 
+    /**
+     * Inscrição Estadual
+     */
+    private String inscEst;
     private ETipoPessoa tipPessoa;
     private String datCad;
     private String cpf;
     private String cnpj;
     private String rg;
-    /**
-     * Inscrição Estadual
-     */
-    private String inscEst;
-    private int id;
 
     public ETipoPessoa getTipPessoa() {
 	return tipPessoa;
@@ -62,14 +61,6 @@ public class Cliente extends Pessoa {
 
     public void setInscEst(String inscEst) {
 	this.inscEst = inscEst;
-    }
-
-    public int getId() {
-	return id;
-    }
-
-    public void setId(int id) {
-	this.id = id;
     }
 
 }

@@ -133,14 +133,13 @@ public class ClienteDAO implements IDataAccessObject {
     }
 
     @Override
-    public void remover(IEntidade entidade) throws SQLException {
+    public void remover(int idEntidade) throws SQLException {
 
 	Connection connection = new ConnectionFactory().getConnection();
 	try {
-	    Cliente cliente = (Cliente) entidade;
 
 	    PreparedStatement stmt = connection.prepareStatement("delete from cliente where id=?");
-	    stmt.setInt(1, cliente.getId());
+	    stmt.setInt(1, idEntidade);
 	    stmt.execute();
 	    stmt.close();
 	} finally {

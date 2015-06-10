@@ -110,14 +110,12 @@ public class VeiculoDAO implements IDataAccessObject {
     }
 
     @Override
-    public void remover(IEntidade entidade) throws SQLException {
+    public void remover(int idEntidade) throws SQLException {
 
 	Connection connection = new ConnectionFactory().getConnection();
 	try {
-	    Veiculo veiculo = (Veiculo) entidade;
-
 	    PreparedStatement stmt = connection.prepareStatement("delete from veiculo where id=?");
-	    stmt.setInt(1, veiculo.getId());
+	    stmt.setInt(1, idEntidade);
 	    stmt.execute();
 	    stmt.close();
 	} finally {

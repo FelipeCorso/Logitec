@@ -30,13 +30,8 @@ public class ClienteServlet extends HttpServlet {
 	try {
 	    int id = Integer.valueOf(request.getParameter(ColunasCliente.ID)).intValue();
 	    Cliente cliente = (Cliente) ClienteDAO.getInstance().recuperar(id);
-	    boolean inserir = false;
 
-	    if (cliente == null) {
-		cliente = new Cliente();
-		cliente.setId(id);
-		inserir = true;
-	    }
+	    cliente.setId(id);
 
 	    // Pessoa
 	    cliente.setNome(request.getParameter(ColunasPessoa.NOME));
@@ -52,14 +47,46 @@ public class ClienteServlet extends HttpServlet {
 	    cliente.setRg(request.getParameter(ColunasCliente.RG));
 	    cliente.setInscEst(request.getParameter(ColunasCliente.INSCRICAO_ESTADUAL));
 
-	    if (inserir) {
-		ClienteDAO.getInstance().inserir(cliente);
-	    } else {
-		ClienteDAO.getInstance().alterar(cliente);
-	    }
+	    ClienteDAO.getInstance().inserir(cliente);
+
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
 
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	try {
+	    int id = Integer.valueOf(request.getParameter(ColunasCliente.ID)).intValue();
+	    Cliente cliente = (Cliente) ClienteDAO.getInstance().recuperar(id);
+
+	    cliente.setId(id);
+
+	    /*
+	     * TODO: tratar a parte de atualizar o cliente aqui
+	     */
+
+	    ClienteDAO.getInstance().alterar(cliente);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	int id = Integer.valueOf(request.getParameter(ColunasCliente.ID)).intValue();
+
+	/*
+	 * TODO: tratar a parte de remover o cliente aqui
+	 */
+
+	try {
+	    ClienteDAO.getInstance().remover(id);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
     }
 }

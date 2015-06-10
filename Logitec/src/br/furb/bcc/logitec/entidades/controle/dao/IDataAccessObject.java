@@ -12,5 +12,5 @@ public interface IDataAccessObject {
 
     public void alterar(IEntidade entidade) throws SQLException;
 
-    public void remover(IEntidade entidade) throws SQLException;
+    public void remover(int idEntidade) throws SQLException;
 }

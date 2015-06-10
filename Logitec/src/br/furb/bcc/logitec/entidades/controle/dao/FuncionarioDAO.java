@@ -144,14 +144,12 @@ public class FuncionarioDAO implements IDataAccessObject {
     }
 
     @Override
-    public void remover(IEntidade entidade) throws SQLException {
+    public void remover(int idEntidade) throws SQLException {
 
 	Connection connection = new ConnectionFactory().getConnection();
 	try {
-	    Funcionario funcionario = (Funcionario) entidade;
-
 	    PreparedStatement stmt = connection.prepareStatement("delete from funcionario where id=?");
-	    stmt.setInt(1, funcionario.getId());
+	    stmt.setInt(1, idEntidade);
 	    stmt.execute();
 	    stmt.close();
 	} finally {

@@ -9,12 +9,26 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
-<!-- jQuery -->
+<!-- jQuery 
 <script src="../js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").load("demo_test.txt");
+        $( "#new-projects" ).load( "/pages/cliente/cliente_adicionar.html" );
+    });
+});
+</script>
+
 </head>
 <body>
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -65,7 +79,11 @@
 		<div class="row">
 			<form>
 				<div class="controls">
-					<label>Nome completo:</label> <input type="text" class="form-control" size="20px" id="name" required data-validation-required-message="Please enter your name.">
+				<div class="col-md-2">
+					<label>Nome completo:</label></div>
+				<div class="col-md-4">	 <input type="text" class="form-control" size="20px" id="name" required data-validation-required-message="Please enter your name.">
+				
+					
 					<p class="help-block"></p>
 
 					<label>CPF/CNPJ:</label> <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
@@ -86,5 +104,14 @@
 			</form>
 		</div>
 	</div>
+<b>Projects:</b>
+<div id="new-projects"></div>
+ 
+<script>
+$(document).ready(function(){
+	$( "#new-projects" ).load( "pages/cliente/cliente_adicionar.html" );
+});
+
+</script>
 </body>
 </html>

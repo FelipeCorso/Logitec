@@ -9,12 +9,12 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
-<!-- jQuery 
-<script src="../js/jquery.js"></script>
+<!-- jQuery  -->
+<script src="js/jquery-1.11.3.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="../js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script>
 $(document).ready(function(){
     $("button").click(function(){
@@ -57,12 +57,12 @@ $(document).ready(function(){
 				<div class="panel-heading">
 					<img src="icon/frete_64.png" alt="Cinque Terre" width="64" height="64">
 
-					<h5>Fretes em Aberto</h5>
+					<a href="pages/cliente/cliente_adicionar.html" target="#"><h5>Fretes em Aberto</h5> </a>
 				</div>
 
 			</div>
 			<div class="col-md-2 panel text-center">
-				<div class="panel-heading">
+				<div id ="teste"class="panel-heading">
 					<img src="icon/frete_64.png" alt="Cinque Terre" width="64" height="64">
 
 					<h5>Fretes Finalizados</h5>
@@ -108,8 +108,8 @@ $(document).ready(function(){
 <div id="new-projects"></div>
  
 <script>
-$(document).ready(function(){
-	$( "#new-projects" ).load( "pages/cliente/cliente_adicionar.html" );
+jQuery(document).ready(function(){
+	jQuery( "#new-projects" ).load( "pages/cliente/cliente_adicionar.html" );
 });
 
 </script>

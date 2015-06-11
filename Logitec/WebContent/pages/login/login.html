@@ -19,13 +19,14 @@
 </div>
 	<div class="container col-md-4 panel">
 
-		<form class="form-signin">
+		<form action = "/Logitec/usrAuth" method = "post" class="form-signin">
 			<h2 class="form-signin-heading">Logitec</h2>
-			<label for="inputEmail" class="sr-only">Usuário</label> <input type="email" id="inputEmail" class="form-control" placeholder="usuário" required autofocus> <label
-				for="inputPassword" class="sr-only">Senha</label> <input type="password" id="inputPassword" class="form-control" placeholder="senha" required>
+			<label for="inputEmail" class="sr-only">Usuário</label>
+			<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="usuário" required autofocus></input>
+			<label for="inputPassword" class="sr-only">Senha</label>
+			<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="senha" required></input>
 			<div class="checkbox">
-				<label> <input type="checkbox" value="remember-me"> Lembre-me
-				</label>
+				<label><input type="checkbox" value="remember-me"> Lembre-me</label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 		</form>

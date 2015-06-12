@@ -23,12 +23,6 @@ public class UserAuthServlet extends HttpServlet {
     private static final String INPUT_PASSWORD = "inputPassword";
     private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	System.out.println("Triste");
-	super.doGet(req, resp);
-    }
-
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
@@ -46,7 +40,7 @@ public class UserAuthServlet extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
 		if (dispatcher != null) {
-		    dispatcher.forward(request, response);
+		    // dispatcher.forward(request, response);
 		}
 	    } else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login/login.html");

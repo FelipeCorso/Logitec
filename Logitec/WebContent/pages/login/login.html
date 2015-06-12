@@ -13,23 +13,28 @@
 <script src="../../js/jquery-1.11.3.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../../js/bootstrap.min.js"></script>
+<!-- Script Autenticacao -->
+<script src="../../js/userAuthentication.js"></script>
 </head>
 <body>
 <div class="container col-md-4 panel">
 </div>
 	<div class="container col-md-4 panel">
 
-		<form action = "/Logitec/usrAuth" method = "post" class="form-signin">
+<!-- action = "/Logitec/usrAuth" -->
+		<form id="login" action = "" method = "post" class="form-signin">
 			<h2 class="form-signin-heading">Logitec</h2>
 			<label for="inputEmail" class="sr-only">Usuário</label>
-			<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="usuário" required autofocus></input>
+			<input value="felipe.corso@live.com" type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="usuário" required autofocus></input>
 			<label for="inputPassword" class="sr-only">Senha</label>
-			<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="senha" required></input>
+			<input value="abc" type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="senha" required></input>
 			<div class="checkbox">
 				<label><input type="checkbox" value="remember-me"> Lembre-me</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Login</button>
 		</form>
+		
+		<div id="msg"></div>
 
 	</div>
 	<!-- /container -->

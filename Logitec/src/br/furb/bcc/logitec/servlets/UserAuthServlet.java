@@ -38,12 +38,12 @@ public class UserAuthServlet extends HttpServlet {
 		session.setAttribute(INPUT_EMAIL, usuario.getEmail());
 		session.setAttribute(INPUT_PASSWORD, usuario.getPassword());
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		if (dispatcher != null) {
 		    // dispatcher.forward(request, response);
 		}
 	    } else {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login/login.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login/login.jsp");
 		if (dispatcher != null) {
 		    dispatcher.forward(request, response);
 		}

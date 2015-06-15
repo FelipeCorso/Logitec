@@ -2,7 +2,9 @@ package br.furb.bcc.logitec.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.furb.bcc.logitec.entidades.controle.dao.VeiculoDAO;
 import br.furb.bcc.logitec.entidades.controle.dao.colunas.ColunasVeiculo;
-import br.furb.bcc.logitec.entidades.modelo.veiculo.ETipoVeiculo;
-import br.furb.bcc.logitec.entidades.modelo.veiculo.Veiculo;
+import br.furb.bcc.logitec.entidades.modelo.IEntidade;
 
 /**
  * Servlet implementation class Veiculo
  */
-@WebServlet(name = "Veiculo", urlPatterns = { "/Veiculo" })
+@WebServlet(name = "veiculo", urlPatterns = { "/veiculo" })
 public class VeiculoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -25,26 +26,20 @@ public class VeiculoServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	String placa = request.getParameter(ColunasVeiculo.PLACA);
+	String tipo = request.getParameter(ColunasVeiculo.TIPO);
+	String descricao = request.getParameter(ColunasVeiculo.DESCRICAO);
+	String capacidade = request.getParameter(ColunasVeiculo.CAPACIDADE);
+
 	try {
-	    int intValue = Integer.valueOf(request.getParameter(ColunasVeiculo.ID)).intValue();
-	    Veiculo veiculo = (Veiculo) VeiculoDAO.getInstance().recuperar(intValue);
+	    List<IEntidade> listaVeiculos = VeiculoDAO.getInstance().recuperar(placa, tipo, descricao, capacidade);
+	    request.setAttribute("listaVeiculos", listaVeiculos);
 
-	    boolean inserir = false;
-
-	    if (veiculo == null) {
-		veiculo = new Veiculo();
-		veiculo.setId(intValue);
-		inserir = true;
-	    }
-
-	    veiculo.setTipo(ETipoVeiculo.valueOf(request.getParameter(ColunasVeiculo.TIPO)));
-	    veiculo.setPlaca(request.getParameter(ColunasVeiculo.PLACA));
-	    veiculo.setCapacidade(Double.valueOf(request.getParameter(ColunasVeiculo.CAPACIDADE)).doubleValue());
-
-	    if (inserir) {
-		VeiculoDAO.getInstance().inserir(veiculo);
-	    } else {
-		VeiculoDAO.getInstance().alterar(veiculo);
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/veiculo/buscaVeiculo.jsp");
+	    if (dispatcher != null) {
+		dispatcher.forward(request, response);
+		return;
 	    }
 
 	} catch (SQLException e) {

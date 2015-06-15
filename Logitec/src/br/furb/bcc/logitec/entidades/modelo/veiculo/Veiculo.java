@@ -3,13 +3,23 @@ package br.furb.bcc.logitec.entidades.modelo.veiculo;
 import br.furb.bcc.logitec.entidades.modelo.IEntidade;
 
 public class Veiculo implements IEntidade {
+
     private int id;
-    private ETipoVeiculo tipo;
     private String placa;
+    private String descricao;
+    private ETipoVeiculo tipo;
     private double capacidade;
 
     public ETipoVeiculo getTipo() {
 	return tipo;
+    }
+
+    public String getDescricao() {
+	return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+	this.descricao = descricao;
     }
 
     public void setTipo(ETipoVeiculo tipo) {

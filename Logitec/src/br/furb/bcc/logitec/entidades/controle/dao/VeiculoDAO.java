@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.furb.bcc.logitec.entidades.controle.conexao.ConnectionFactory;
 import br.furb.bcc.logitec.entidades.controle.dao.colunas.ColunasVeiculo;
@@ -24,56 +26,95 @@ public class VeiculoDAO implements IDataAccessObject {
 	return INSTANCE;
     }
 
-    @Override
-    public IEntidade recuperar(int id) throws SQLException {
+    public IEntidade recuperar(String placa) throws SQLException {
+	List<IEntidade> entidades = recuperar(placa, "", "", "");
 
+	if (entidades.isEmpty()) {
+	    return null;
+	}
+
+	return entidades.get(0);
+
+    }
+
+    public List<IEntidade> recuperar(String placa, String tipo, String descricao, String capacidade) throws SQLException {
 	Connection connection = new ConnectionFactory().getConnection();
 	try {
 
-	    String sql = "SELECT * FROM VEICULO WHERE id={0}";
-	    PreparedStatement stmt = connection.prepareStatement(MessageFormat.format(sql, id));
+	    String sql = "SELECT * FROM VEICULO {0}";
+
+	    String where = createWhere(placa, tipo, descricao, capacidade);
+	    if (!where.isEmpty()) {
+		where = " WHERE " + where;
+	    }
+
+	    List<IEntidade> veiculos = new ArrayList<IEntidade>();
+
+	    PreparedStatement stmt = connection.prepareStatement(MessageFormat.format(sql, where));
 	    ResultSet rs = stmt.executeQuery();
 
-	    Veiculo veiculo = new Veiculo();
-	    veiculo.setId(rs.getInt(ColunasVeiculo.ID));
-	    veiculo.setTipo(ETipoVeiculo.valueOf(rs.getString(ColunasVeiculo.TIPO)));
-	    veiculo.setPlaca(rs.getString(ColunasVeiculo.PLACA));
-	    veiculo.setCapacidade(rs.getDouble(ColunasVeiculo.CAPACIDADE));
+	    while (rs.next()) {
 
-	    return veiculo;
+		Veiculo veiculo = new Veiculo();
+		veiculo.setPlaca(rs.getString(ColunasVeiculo.PLACA));
+		veiculo.setTipo(ETipoVeiculo.valueOf(rs.getInt("IDTIPOVEICULO")));
+		veiculo.setDescricao(rs.getString(ColunasVeiculo.DESCRICAO));
+		veiculo.setCapacidade(rs.getDouble(ColunasVeiculo.CAPACIDADE));
+
+		veiculos.add(veiculo);
+	    }
+	    rs.close();
+	    stmt.close();
+	    return veiculos;
 
 	} finally {
 	    if (connection != null) {
 		connection.close();
 	    }
 	}
+    }
 
+    private String createWhere(String placa, String tipo, String descricao, String capacidade) {
+
+	StringBuilder sb = new StringBuilder();
+
+	if (placa != null && !placa.isEmpty()) {
+	    sb.append(" placa='" + placa + "'");
+	}
+	if (tipo != null && !tipo.isEmpty()) {
+	    ETipoVeiculo tipoVeiculo = ETipoVeiculo.valueOf(tipo.toUpperCase());
+	    sb.append(" IDTIPOVEICULO=");
+	    sb.append(tipoVeiculo.getCodigoTipo());
+	}
+	if (descricao != null && !descricao.isEmpty()) {
+	    sb.append(" descricao='" + descricao + "'");
+	}
+	if (capacidade != null && !capacidade.isEmpty()) {
+	    sb.append(" capacidade=");
+	    sb.append(capacidade);
+	}
+
+	return sb.toString();
     }
 
     @Override
     public void inserir(IEntidade entidade) throws SQLException {
 
-	int newId = getNewId();
-	if (newId == 0) {
-	    newId = 1;
-	}
-
 	Connection connection = new ConnectionFactory().getConnection();
 	try {
 
-	    String sql = "insert into veiculo " + "(id, tipo, placa, capacidade)" + " values (?, ?, ?, ?)";
+	    String sql = "insert into veiculo " + "(placa, capacidade, descricao, idTipoVeiculo)" + " values (?, ?, ?, ?)";
 
 	    Veiculo veiculo = (Veiculo) entidade;
-	    veiculo.setId(newId);
 
 	    // prepared statement para inserção
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 
 	    // seta os valores
-	    stmt.setInt(1, veiculo.getId());
-	    stmt.setString(2, veiculo.getTipo().toString());
-	    stmt.setString(3, veiculo.getPlaca());
-	    stmt.setDouble(4, veiculo.getCapacidade());
+	    stmt.setString(1, veiculo.getPlaca());
+	    stmt.setDouble(2, veiculo.getCapacidade());
+	    stmt.setString(3, veiculo.getDescricao());
+	    stmt.setInt(4, veiculo.getTipo().getCodigoTipo());
 
 	    // executa
 	    stmt.execute();
@@ -90,15 +131,15 @@ public class VeiculoDAO implements IDataAccessObject {
     public void alterar(IEntidade entidade) throws SQLException {
 	Connection connection = new ConnectionFactory().getConnection();
 	try {
-	    String sql = "update veiculo set tipo=?, placa=?, capacidade=?" + " where id=?";
+	    String sql = "update veiculo set capacidade=?, descricao=?, idTipoVeiculo=?" + " where placa=?";
 
 	    Veiculo veiculo = (Veiculo) entidade;
 
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setString(1, veiculo.getTipo().toString());
-	    stmt.setString(2, veiculo.getPlaca());
-	    stmt.setDouble(3, veiculo.getCapacidade());
-	    stmt.setInt(4, veiculo.getId());
+	    stmt.setDouble(1, veiculo.getCapacidade());
+	    stmt.setString(2, veiculo.getDescricao());
+	    stmt.setDouble(3, veiculo.getTipo().getCodigoTipo());
+	    stmt.setString(4, veiculo.getPlaca());
 
 	    stmt.execute();
 	    stmt.close();
@@ -146,6 +187,11 @@ public class VeiculoDAO implements IDataAccessObject {
 		connection.close();
 	    }
 	}
+    }
+
+    @Override
+    public IEntidade recuperar(int id) throws SQLException {
+	throw new IllegalAccessError("Método não implementado");
     }
 
 }

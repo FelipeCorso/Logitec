@@ -2,8 +2,8 @@
  * 
  */
 
-function p(){
-	$("#submit").click(function(e){
+function login() {
+	$("#submit").click(function(e) {
 		
 		//$('input[type=submit]').click(function(e){
 		//setamos para quando submeter não atualizar a pagina   
@@ -13,30 +13,31 @@ function p(){
 		
 		$("#msg").html("Validando o usuário, aguarde ...");
 		
-		var url2 = "http://localhost:9090/Logitec/usrAuth";
+//		var url2 = "http://localhost/Logitec/users/";
+		var url2 = "/Logitec/users/";
 		$.ajax({type: "post", url: url2, 
 			//async: false, cache: false, crossDomain: false,
 			dataType: "json",
-			data: valores, 
+			data: valores,
 			success: function(result){
-				//alert(result.msg);
-				console.log(result);
-				if (result.errno==0) {
-					// similar behavior as an HTTP redirect
-					window.location.replace("http://localhost:9090/Logitec/index.html");
-					// similar behavior as clicking on a link
-					//window.location.href = "http://localhost:8080/examples/jsp/pagpri.jsp";
+//				alert(result.msg);
+				if (result.errno == 0) {
+//					 similar behavior as an HTTP redirect
+					window.location.replace("/Logitec/index.jsp");
+//					window.location.assign("http://localhost/Logitec/index.jsp");
+//					 similar behavior as clicking on a link
+//					window.location.href = "http://localhost/Logitec/index.jsp";
 				} else {
 					$("#msg").html(result.msg);
-					console.log(result);
+					console.error(result);
 				}
 			},
-			error: function(result,txt){
+			error: function(result, txt){
 				$("#msg").html(txt);
-				console.log(result);
+				console.error(result);
 			}
 		});
 	});
 }
 
-$(document).ready(p);
+$(document).ready(login);

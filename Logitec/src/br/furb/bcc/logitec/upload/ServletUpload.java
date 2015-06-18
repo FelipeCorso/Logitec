@@ -41,7 +41,7 @@ public class ServletUpload extends HttpServlet {
 		out.println("<html>");
 		out.println("<body>");
 		out.println("Cliente cadastrado com sucesso</br>");
-		out.println("<a href='Logitec/index.jsp#noticia1'>Voltar para home</a href>");
+		out.println("<a href='index.jsp#noticia1'>Voltar para home</a href>");
 		out.println("</body>");
 		out.println("</html>");
 

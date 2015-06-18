@@ -27,4 +27,14 @@
     <url-pattern>/updateVeiculo/*</url-pattern>
   </servlet-mapping>
   
+      <servlet>
+      
+  <servlet-name>servlet_upload</servlet-name>
+    <servlet-class>br.furb.bcc.logitec.upload.ServletUpload</servlet-class>
+  </servlet>  
+  <servlet-mapping>
+    <servlet-name>servlet_upload</servlet-name>
+    <url-pattern>/upload/upload</url-pattern>
+  </servlet-mapping> 
+  
 </web-app>

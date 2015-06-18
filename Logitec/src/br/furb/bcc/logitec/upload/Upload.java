@@ -13,7 +13,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
-import br.furb.bcc.logitec.clienteMySQL.ClienteDAO;
+import br.furb.bcc.logitec.entidades.controle.dao.ClienteDAO;
 import br.furb.bcc.logitec.entidades.modelo.pessoa.cliente.Cliente;
 
 public class Upload {
@@ -81,7 +81,7 @@ public class Upload {
 			    System.out.println("caminho: " + saveTo.toString());
 			    try {
 				fileItem.write(saveTo);
-				ClienteDAO clienteDAO = new ClienteDAO();
+				ClienteDAO clienteDAO = ClienteDAO.getInstance();
 				clienteDAO.incluir(cliente, saveTo.toString());
 			    } catch (Exception e) {
 			    }

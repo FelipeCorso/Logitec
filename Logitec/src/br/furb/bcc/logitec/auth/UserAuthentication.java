@@ -1,40 +1,45 @@
 package br.furb.bcc.logitec.auth;
 
-import java.io.IOException;
-
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Context;
 
-//@WebServlet("/usrAuth")
-
-@Path("/usrAuth")
-public class UserAuthentication extends HttpServlet {
-
-    private static final long serialVersionUID = -5027049441943115201L;
+@Path("/users")
+public class UserAuthentication {
 
     @POST
-    public void authentication() {
-	System.out.println("PASSOU!!! \0/");
-    }
+    public String getUserByIdPost(@Context HttpServletResponse response, @Context HttpServletRequest request) throws ServletException {
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String authenticationGet() {
-	String passou = "PASSOU!!! \0/";
-	System.out.println(passou);
-	return passou;
-    }
+	response.setContentType("application/json");
+	response.setHeader("Access-Control-Allow-Origin", "*");
+	response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	super.doPost(req, resp);
+	String email = request.getParameter("inputEmail");
+	String senha = request.getParameter("inputPassword");
+	if (email == null) {
+	    email = "";
+	}
+	if (senha == null) {
+	    senha = "";
+	}
+
+	String username = "Felipe Corso";
+	// Consultar um banco de dados, ou um array, por exemplo
+
+	if ((email.equals("felipe.corso@live.com")) && senha.equals("abc")) {
+	    HttpSession session = request.getSession();
+	    session.setAttribute("email", email);
+	    session.setAttribute("username", username);
+
+	    return "{\"errno\": \"0\", \"msg\": \"Ok\"}";
+
+	} else {
+	    return "{\"errno\": \"1\", \"msg\": \"Usu&aacute;rio inv&aacute;lido\"}";
+	}
     }
 
 }

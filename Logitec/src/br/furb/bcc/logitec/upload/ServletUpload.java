@@ -55,7 +55,6 @@ public class ServletUpload extends HttpServlet {
 	// escreve o texto br.furb.bcc.logitec.upload.ServletUpload
 	out.println("<html>");
 	out.println("<body>");
-	out.println("Primeira servlet");
 	out.println("</body>");
 	out.println("</html>");
     }

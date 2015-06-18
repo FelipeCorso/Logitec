@@ -82,7 +82,7 @@ public class VeiculoDAO implements IDataAccessObject {
 	    sb.append(" placa='" + placa + "'");
 	}
 	if (tipo != null && !tipo.isEmpty()) {
-	    ETipoVeiculo tipoVeiculo = ETipoVeiculo.valueOf(tipo.toUpperCase());
+	    ETipoVeiculo tipoVeiculo = ETipoVeiculo.valueOf(Integer.valueOf(tipo));
 	    sb.append(" IDTIPOVEICULO=");
 	    sb.append(tipoVeiculo.getCodigoTipo());
 	}
@@ -138,7 +138,7 @@ public class VeiculoDAO implements IDataAccessObject {
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setDouble(1, veiculo.getCapacidade());
 	    stmt.setString(2, veiculo.getDescricao());
-	    stmt.setDouble(3, veiculo.getTipo().getCodigoTipo());
+	    stmt.setInt(3, veiculo.getTipo().getCodigoTipo());
 	    stmt.setString(4, veiculo.getPlaca());
 
 	    stmt.execute();

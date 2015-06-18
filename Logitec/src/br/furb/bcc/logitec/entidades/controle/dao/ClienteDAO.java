@@ -1,6 +1,7 @@
 package br.furb.bcc.logitec.entidades.controle.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,12 +18,49 @@ public class ClienteDAO implements IDataAccessObject {
 
     private static final ClienteDAO INSTANCE = new ClienteDAO();
 
+    Connection con;
+    PreparedStatement pstmt;
+    ResultSet rs;
+
     private ClienteDAO() {
 
     }
 
     public static ClienteDAO getInstance() {
 	return INSTANCE;
+    }
+
+    public int incluir(Cliente cliente, String imagemCaminho) throws ClassNotFoundException, SQLException {
+	int registroIncluir = 0;
+	try {
+	    Class.forName("com.mysql.jdbc.Driver");
+
+	    con = DriverManager.getConnection("jdbc:mysql://" + "localhost" + "/" + "logitec", "root", "root");
+
+	    pstmt = con.prepareStatement("INSERT INTO clientes(nm_cliente, ds_imagem) VALUES ( ?, ?)");
+
+	    pstmt.setString(1, cliente.getNome());
+	    pstmt.setString(2, imagemCaminho);
+
+	    System.out.println(pstmt);
+
+	    registroIncluir = pstmt.executeUpdate();
+
+	} catch (ClassNotFoundException e) {
+	    throw new ClassNotFoundException();
+
+	} catch (SQLException e) {
+	    throw new SQLException();
+	} finally {
+
+	    if (pstmt != null)
+		pstmt.close();
+
+	    if (con != null)
+		con.close();
+	}
+
+	return registroIncluir;
     }
 
     @Override

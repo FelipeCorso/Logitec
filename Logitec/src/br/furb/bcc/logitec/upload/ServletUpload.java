@@ -38,6 +38,13 @@ public class ServletUpload extends HttpServlet {
 	PrintWriter out = response.getWriter();
 	try {
 	    if (new Upload().anexos(request, response)) {
+		out.println("<html>");
+		out.println("<body>");
+		out.println("Cliente cadastrado com sucesso</br>");
+		out.println("<a href='Logitec/index.jsp#noticia1'>Voltar para home</a href>");
+		out.println("</body>");
+		out.println("</html>");
+
 		out.print("Ficheiro enviado!");
 	    } else {
 		out.print("Ficheiro não enviado!");

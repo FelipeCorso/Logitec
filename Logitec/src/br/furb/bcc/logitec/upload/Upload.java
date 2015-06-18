@@ -13,6 +13,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
+import br.furb.bcc.logitec.clienteMySQL.ClienteDAO;
+import br.furb.bcc.logitec.entidades.modelo.pessoa.cliente.Cliente;
+
 public class Upload {
 
     public Upload() {
@@ -36,7 +39,7 @@ public class Upload {
 
 	    String optionalFileName = "";
 	    FileItem fileItem = null;
-
+	    Cliente cliente = new Cliente();
 	    Iterator it = fileItemsList.iterator();
 
 	    do {
@@ -44,10 +47,16 @@ public class Upload {
 		cont++;
 
 		FileItem fileItemTemp = (FileItem) it.next();
-
+		System.out.println("id inicio:" + fileItemTemp.getFieldName());
 		if (fileItemTemp.isFormField()) {
 		    if (fileItemTemp.getFieldName().equals("file")) {
 			optionalFileName = fileItemTemp.getString();
+		    }
+		    if (fileItemTemp.getFieldName().equals("nome")) {
+			System.out.println("id:" + fileItemTemp.getFieldName());
+			System.out.println("campo:" + fileItemTemp.getString());
+
+			cliente.setNome(fileItemTemp.getString());
 		    }
 		} else {
 		    fileItem = fileItemTemp;
@@ -66,12 +75,14 @@ public class Upload {
 				fileName = optionalFileName;
 			    }
 
-			    // String dirName = "/P2012-09/web/WEB-INF/imgupload/"; // caminho para o projeto
+			    // String dirName = "C:/imgupload/"; // caminho
 			    String dirName = request.getServletContext().getRealPath("/");
 			    File saveTo = new File(dirName + fileName);
 			    System.out.println("caminho: " + saveTo.toString());
 			    try {
 				fileItem.write(saveTo);
+				ClienteDAO clienteDAO = new ClienteDAO();
+				clienteDAO.incluir(cliente, saveTo.toString());
 			    } catch (Exception e) {
 			    }
 

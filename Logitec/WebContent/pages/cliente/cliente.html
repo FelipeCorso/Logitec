@@ -1,10 +1,17 @@
 
 <div class="container">
-	<form class="form-horizontal" role="form">
+	<form id="formImagem" name="formImagem" method="post" action="upload" enctype="multipart/form-data" class="form-horizontal">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="nome">Nome:</label>
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="nome">
+			</div>
+		</div>	
+		<div class="form-group">
+		     <label class="control-label col-sm-2" for="nome">Foto:</label>
+		     <div class="col-sm-6">
+		     <input name="imagem" type="file"	accept="image/jpeg; image/gif; image/bmp; image/png" id="imagem" class="dados" maxlength="60" tabindex="1" value="c:/" /> 
+	
 			</div>
 		</div>
 		<div class="form-group">
@@ -71,8 +78,8 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="button" class="btn btn-default">Limpar</button>
-				<button type="submit" class="btn btn-primary">Enviar</button>
+				<button type="button" class="btn btn-default">Limpar</button>			
+				<input type="submit" id="upload" name="upload" class="btn btn-primary"/>
 			</div>
 		</div>
 	</form>

@@ -20,7 +20,6 @@ function login() {
 			dataType: "json",
 			data: valores,
 			success: function(result){
-//				alert(result.msg);
 				if (result.errno == 0) {
 //					 similar behavior as an HTTP redirect
 					window.location.replace("/Logitec/index.jsp");

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="pages/login/valida.jsp" %>
+
 <!DOCTYPE html>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>LogiTec</title>
+<title>LogiTec - Página Principal</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap Core CSS -->
@@ -23,19 +25,7 @@
 <script type="text/javascript" src="js/javascript.js"></script>
 
 <%
-	String email = (String)session.getAttribute("email");
 	String username = (String)session.getAttribute("username");
-
-	if (username == null) {
-		username = "";
-	}
-
-	if (email == null) {
-		email = "";
-	}
-	if (email == "") {
-		response.sendRedirect("pages/login/login.jsp");
-	}
 %>
 
 </head>
@@ -58,11 +48,11 @@
 					<li>
 						<a>
 							<span class="glyphicon glyphicon-user"></span>
-							<label><%out.print(username.toString());%></label>
+							<label><%out.print(username);%></label>
 						</a>
 					</li>
 					<li>
-						<a href="/Logitec/pages/login/login.jsp" onclick="<%session.setAttribute("email", null);%>">
+						<a href="/Logitec/pages/logoff/logoff.jsp">
 							<span class="glyphicon glyphicon-log-in"></span>
 							<label>Sair</label>
 						</a>

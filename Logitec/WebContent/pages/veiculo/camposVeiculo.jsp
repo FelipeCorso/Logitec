@@ -23,7 +23,7 @@
 					     /*<!-- ContatoDao dao = new ContatoDao(); -->*/
 					    for (ETipoVeiculo tipoVeiculo : ETipoVeiculo.values() ) {
 				     %>
-					<option><%=tipoVeiculo.toString()%></option>
+					<option value="<%=tipoVeiculo.getCodigoTipo()%>"><%=tipoVeiculo.toString()%></option>
 				     <%
 						}
 				     %>

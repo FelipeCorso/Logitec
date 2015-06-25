@@ -10,22 +10,16 @@ CREATE TABLE TipoVeiculo (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE Usuario (
-  idUsuario INTEGER UNSIGNED NOT NULL,
-  nome INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(idUsuario)
-);
-
 CREATE TABLE EstadoCivil (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  descricao VARCHAR(15) NULL,
+  descricao VARCHAR NULL,
   PRIMARY KEY(id)
 );
 
 CREATE TABLE Veiculo (
   placa VARCHAR(8) NOT NULL AUTO_INCREMENT,
   idTipoVeiculo INTEGER UNSIGNED NOT NULL,
-  capacidade FLOAT(10,2) NULL,
+  capacidade FLOAT() NULL,
   descricao VARCHAR(64) NULL,
   PRIMARY KEY(placa),
   FOREIGN KEY(idTipoVeiculo)
@@ -36,51 +30,57 @@ CREATE TABLE Veiculo (
 
 CREATE TABLE Cliente (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  idUsuario INTEGER UNSIGNED NOT NULL,
   idTipoPessoa INTEGER UNSIGNED NOT NULL,
-  nome VARCHAR(64) NULL,
-  endereco VARCHAR(128) NULL,
-  telefone VARCHAR(24) NULL,
-  email VARCHAR(36) NULL,
-  inscricaoEstadual VARCHAR(24) NULL,
+  nome VARCHAR NULL,
+  endereco VARCHAR NULL,
+  telefone VARCHAR NULL,
+  email VARCHAR NULL,
+  inscricaoEstadual VARCHAR NULL,
   datCadastro VARCHAR(8) NULL,
-  cpf INTEGER UNSIGNED NULL,
-  cnpj VARCHAR(24) NULL,
-  rg VARCHAR(16) NULL,
+  cpf VARCHAR NULL,
+  cnpj VARCHAR NULL,
+  rg VARCHAR NULL,
   PRIMARY KEY(id),
   FOREIGN KEY(idTipoPessoa)
     REFERENCES TipoPessoa(id)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-  FOREIGN KEY(idUsuario)
-    REFERENCES Usuario(idUsuario)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
 
 CREATE TABLE Funcionario (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  idUsuario INTEGER UNSIGNED NOT NULL,
   idEstadoCivil INTEGER UNSIGNED NOT NULL,
-  nome VARCHAR(64) NULL,
-  endereco VARCHAR(128) NULL,
-  telefone VARCHAR(24) NULL,
-  email VARCHAR(36) NULL,
+  nome VARCHAR NULL,
+  endereco VARCHAR NULL,
+  telefone VARCHAR NULL,
+  email VARCHAR NULL,
   genero CHAR NULL,
   datAdmissao VARCHAR(8) NULL,
   datNasc VARCHAR(8) NULL,
   cpf INTEGER UNSIGNED NULL,
-  rg VARCHAR(16) NULL,
-  cargo VARCHAR(24) NULL,
+  rg VARCHAR NULL,
+  cargo VARCHAR NULL,
   salario FLOAT NULL,
-  cnh VARCHAR(8) NULL,
+  cnh VARCHAR NULL,
   PRIMARY KEY(id),
   FOREIGN KEY(idEstadoCivil)
     REFERENCES EstadoCivil(id)
       ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE Usuario (
+  idUsuario INTEGER UNSIGNED NOT NULL,
+  idCliente INTEGER UNSIGNED NOT NULL,
+  idFuncionario INTEGER UNSIGNED NOT NULL,
+  nome INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(idUsuario),
+  FOREIGN KEY(idCliente)
+    REFERENCES Cliente(id)
+      ON DELETE NO ACTION
       ON UPDATE NO ACTION,
-  FOREIGN KEY(idUsuario)
-    REFERENCES Usuario(idUsuario)
+  FOREIGN KEY(idFuncionario)
+    REFERENCES Funcionario(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );

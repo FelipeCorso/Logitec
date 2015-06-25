@@ -14,6 +14,16 @@ public class UserAuthentication {
     @POST
     public String getUserByIdPost(@Context HttpServletResponse response, @Context HttpServletRequest request) throws ServletException {
 
+	/*
+	 * FIXME: Ajustar SQL e relacionamentos das tabelas
+	 * 
+	 * Usuario usuario = (Usuario) UsuarioDAO.getInstance().recuperar(email, password);
+	 * 
+	 * if (usuario != null) { HttpSession session = request.getSession(); session.setAttribute(INPUT_EMAIL, usuario.getEmail());
+	 * 
+	 * session.setAttribute(INPUT_PASSWORD, usuario.getPassword());
+	 */
+
 	response.setContentType("application/json");
 	response.setHeader("Access-Control-Allow-Origin", "*");
 	response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
@@ -27,12 +37,10 @@ public class UserAuthentication {
 	    senha = "";
 	}
 
-	String username = "Felipe Corso";
-	// Consultar um banco de dados, ou um array, por exemplo
-
 	if ((email.equals("felipe.corso@live.com")) && senha.equals("abc")) {
 	    HttpSession session = request.getSession();
 	    session.setAttribute("email", email);
+	    String username = "Felipe Corso";
 	    session.setAttribute("username", username);
 
 	    return "{\"errno\": \"0\", \"msg\": \"Ok\"}";

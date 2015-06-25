@@ -4,9 +4,18 @@ import br.furb.bcc.logitec.entidades.modelo.IEntidade;
 
 public class Usuario implements IEntidade {
 
+    private String username;
     private String email;
     private String password;
     private int id;
+
+    public String getUsername() {
+	return username;
+    }
+
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
     public String getEmail() {
 	return email;
